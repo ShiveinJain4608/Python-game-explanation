@@ -161,3 +161,100 @@ elif page == "🔄 Program Flow":
 
     End Game
     """)
+elif page == "▶️ Run Game":
+
+    import random
+
+    st.title("🎮 Hangman Game")
+    st.info("Play the Hangman game directly from the dashboard!")
+
+    words = [
+        "afghanistan",
+        "albania",
+        "algeria",
+        "andorra",
+        "angola",
+        "antigua",
+        "argentina",
+        "armenia",
+        "australia",
+        "austria"
+    ]
+
+    # Initialize game
+    if "word" not in st.session_state:
+        st.session_state.word = random.choice(words)
+
+    if "guessed" not in st.session_state:
+        st.session_state.guessed = []
+
+    if "attempts" not in st.session_state:
+        st.session_state.attempts = 6
+
+    # Display current progress
+    display_word = ""
+
+    for letter in st.session_state.word:
+        if letter in st.session_state.guessed:
+            display_word += letter + " "
+        else:
+            display_word += "_ "
+
+    st.subheader(display_word)
+
+    # Show guessed letters
+    st.write(
+        "Guessed Letters:",
+        ", ".join(st.session_state.guessed)
+        if st.session_state.guessed
+        else "None"
+    )
+
+    # Show attempts left
+    st.write(
+        f"Attempts Remaining: {st.session_state.attempts}"
+    )
+
+    # User input
+    guess = st.text_input(
+        "Enter a letter",
+        max_chars=1
+    )
+
+    # Guess button
+    if st.button("Guess"):
+
+        guess = guess.lower()
+
+        if guess:
+
+            if guess not in st.session_state.guessed:
+
+                st.session_state.guessed.append(guess)
+
+                if guess not in st.session_state.word:
+                    st.session_state.attempts -= 1
+
+            st.rerun()
+
+    # Check win condition
+    if all(
+        letter in st.session_state.guessed
+        for letter in st.session_state.word
+    ):
+        st.success("🎉 Congratulations! You Won!")
+
+    # Check lose condition
+    elif st.session_state.attempts <= 0:
+        st.error(
+            f"💀 Game Over! The word was '{st.session_state.word}'."
+        )
+
+    # New game button
+    if st.button("🔄 New Game"):
+
+        st.session_state.word = random.choice(words)
+        st.session_state.guessed = []
+        st.session_state.attempts = 6
+
+        st.rerun()
