@@ -16,7 +16,8 @@ page = st.sidebar.radio(
     "💻 Source Code",
     "📊 Code Analysis",
     "📄 Code Summary",
-    "🔄 Program Flow"
+    "🔄 Program Flow",
+     "▶️ Run Game"
 ]
 )
 
@@ -160,3 +161,8 @@ elif page == "🔄 Program Flow":
 
     End Game
     """)
+elif page == "▶️ Run Game":
+
+    st.title("🎮 Hangman Game")
+
+    st.info("Play the Hangman game directly from the dashboard!")
