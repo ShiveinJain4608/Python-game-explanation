@@ -6,10 +6,17 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("🐍 Python Code Explainer Dashboard")
+st.sidebar.title("Navigation")
 
-st.markdown(
-    "Upload or display Python code and explain its working step-by-step."
+page = st.sidebar.radio(
+    "Select a Page",
+    [
+        "🏠 Home",
+        "💻 Source Code",
+        "📝 Explanation",
+        "📊 Flowchart",
+        "▶️ Run Program"
+    ]
 )
 
 code = """
@@ -18,17 +25,55 @@ name = input("Enter your name: ")
 print("Hello", name)
 """
 
-col1, col2 = st.columns(2)
+if page == "🏠 Home":
+    st.title("🐍 Python Code Explainer Dashboard")
+    st.write(
+        "This dashboard helps explain Python programs visually."
+    )
 
-with col1:
-    st.subheader("💻 Python Code")
+elif page == "💻 Source Code":
+    st.title("💻 Source Code")
     st.code(code, language="python")
 
-with col2:
-    st.subheader("📝 Explanation")
+elif page == "📝 Explanation":
+    st.title("📝 Explanation")
     st.write("""
-    - Line 1 prints 'Welcome'.
-    - Line 2 asks the user for input.
-    - Line 3 stores the input in a variable called `name`.
-    - Line 4 displays a greeting message.
+    1. The program prints Welcome.
+    2. It asks the user to enter their name.
+    3. The name is stored in a variable.
+    4. A greeting is displayed.
     """)
+
+elif page == "📊 Flowchart":
+    st.title("📊 Program Flow")
+    st.markdown("""
+    Start
+
+    ↓
+
+    Print Welcome
+
+    ↓
+
+    Take User Input
+
+    ↓
+
+    Store Name
+
+    ↓
+
+    Print Greeting
+
+    ↓
+
+    End
+    """)
+
+elif page == "▶️ Run Program":
+    st.title("▶️ Run Program")
+
+    name = st.text_input("Enter your name")
+
+    if st.button("Run"):
+        st.success(f"Hello {name}")
