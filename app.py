@@ -107,3 +107,56 @@ elif page == "📄 Code Summary":
     - User Input
     - Random Module
     """)
+elif page == "🔄 Program Flow":
+
+    st.title("🔄 Program Flow")
+
+    st.markdown("""
+    ### Hangman Game Flow
+
+    Start
+
+    ↓
+
+    Display Welcome Message
+
+    ↓
+
+    Select Random Word
+
+    ↓
+
+    Initialize Game Variables
+
+    ↓
+
+    Ask User for a Letter
+
+    ↓
+
+    Is Letter in Word?
+
+    ↓
+
+    Yes → Update Progress
+
+    ↓
+
+    No → Reduce Attempts
+
+    ↓
+
+    Is Word Complete?
+
+    ↓
+
+    Yes → Player Wins
+
+    ↓
+
+    No → Continue Loop
+
+    ↓
+
+    End Game
+    """)
