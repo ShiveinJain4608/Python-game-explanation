@@ -166,10 +166,9 @@ elif page == "▶️ Run Game":
 
     import random
 
-    st.title("🎮 Hangman Game")
-    st.info("Play the Hangman game directly from the dashboard!")
+    st.title("🌍 Guess The Country")
 
-    words = [
+    countries = [
         "afghanistan",
         "albania",
         "algeria",
@@ -182,80 +181,128 @@ elif page == "▶️ Run Game":
         "austria"
     ]
 
-    # Initialize game
-    if "word" not in st.session_state:
-        st.session_state.word = random.choice(words)
+    level1_hints = {
+        "afghanistan":"a.g..ni...n",
+        "albania":"a.b..i.",
+        "algeria":"a.g.ri.",
+        "andorra":"a..o.ra",
+        "angola":"a.g..a",
+        "antigua":"an.i..a",
+        "argentina":"ar...t..a",
+        "armenia":"a..e..a",
+        "australia":"a..tr..i.",
+        "austria":"a..t..a"
+    }
 
-    if "guessed" not in st.session_state:
-        st.session_state.guessed = []
+    level2_hints = {
+        "afghanistan":"The flag of this country has changed 20 times in 102 years.",
+        "albania":"This country has 4 UNESCO World Heritage Sites.",
+        "algeria":"The capital city is known as 'The White'.",
+        "andorra":"This country has no military.",
+        "angola":"This country is twice the size of France.",
+        "antigua":"Its mountains are named after presidents.",
+        "argentina":"The first animated creature film was made here.",
+        "armenia":"First country to adopt Christianity.",
+        "australia":"The flattest continent-country.",
+        "austria":"The first postcard came from this country."
+    }
 
-    if "attempts" not in st.session_state:
-        st.session_state.attempts = 6
+    # Start new game
+    if "country" not in st.session_state:
 
-    # Display current progress
-    display_word = ""
+        st.session_state.country = random.choice(countries)
+        st.session_state.progress = ""
+        st.session_state.position = 0
+        st.session_state.level = None
+        st.session_state.attempts = len(st.session_state.country)
 
-    for letter in st.session_state.word:
-        if letter in st.session_state.guessed:
-            display_word += letter + " "
-        else:
-            display_word += "_ "
+    # Level selection
+    if st.session_state.level is None:
 
-    st.subheader(display_word)
-
-    # Show guessed letters
-    st.write(
-        "Guessed Letters:",
-        ", ".join(st.session_state.guessed)
-        if st.session_state.guessed
-        else "None"
-    )
-
-    # Show attempts left
-    st.write(
-        f"Attempts Remaining: {st.session_state.attempts}"
-    )
-
-    # User input
-    guess = st.text_input(
-        "Enter a letter",
-        max_chars=1
-    )
-
-    # Guess button
-    if st.button("Guess"):
-
-        guess = guess.lower()
-
-        if guess:
-
-            if guess not in st.session_state.guessed:
-
-                st.session_state.guessed.append(guess)
-
-                if guess not in st.session_state.word:
-                    st.session_state.attempts -= 1
-
-            st.rerun()
-
-    # Check win condition
-    if all(
-        letter in st.session_state.guessed
-        for letter in st.session_state.word
-    ):
-        st.success("🎉 Congratulations! You Won!")
-
-    # Check lose condition
-    elif st.session_state.attempts <= 0:
-        st.error(
-            f"💀 Game Over! The word was '{st.session_state.word}'."
+        level = st.selectbox(
+            "Select Level",
+            [1, 2]
         )
 
-    # New game button
-    if st.button("🔄 New Game"):
+        if st.button("Start Game"):
 
-        st.session_state.word = random.choice(words)
-        st.session_state.guessed = []
-        st.session_state.attempts = 6
+            st.session_state.level = level
+            st.rerun()
 
-        st.rerun()
+    else:
+
+        country = st.session_state.country
+
+        st.subheader(
+            f"Attempts Remaining: {st.session_state.attempts}"
+        )
+
+        st.write(
+            f"Country starts with: **{country[0].upper()}**"
+        )
+
+        if st.session_state.level == 1:
+
+            st.success("Level 1 Hint")
+            st.code(level1_hints[country])
+
+        else:
+
+            st.success("Level 2 Hint")
+            st.info(level2_hints[country])
+
+        st.write(
+            f"Progress: **{st.session_state.progress}**"
+        )
+
+        guess = st.text_input(
+            "Guess the next character",
+            max_chars=1
+        )
+
+        if st.button("Submit Guess"):
+
+            if guess:
+
+                guess = guess.lower()
+
+                expected = country[
+                    st.session_state.position
+                ]
+
+                if guess == expected:
+
+                    st.session_state.progress += guess
+                    st.session_state.position += 1
+
+                    if (
+                        st.session_state.progress
+                        == country
+                    ):
+                        st.success(
+                            f"🎉 You Won! The country was {country.title()}"
+                        )
+
+                else:
+
+                    st.error("Wrong Guess")
+
+                    st.session_state.attempts -= 1
+
+                    if st.session_state.attempts <= 0:
+
+                        st.error(
+                            f"Game Over! The country was {country.title()}"
+                        )
+
+                st.rerun()
+
+        if st.button("🔄 New Game"):
+
+            st.session_state.country = random.choice(countries)
+            st.session_state.progress = ""
+            st.session_state.position = 0
+            st.session_state.level = None
+            st.session_state.attempts = len(st.session_state.country)
+
+            st.rerun()
