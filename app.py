@@ -11,11 +11,12 @@ st.sidebar.title("Navigation")
 
 page = st.sidebar.radio(
     "Select a Page",
-  [
+ [
     "🏠 Home",
     "💻 Source Code",
     "📊 Code Analysis",
-    "📝 Explanation"
+    "📄 Code Summary",
+    "🔄 Program Flow"
 ]
 )
 
@@ -83,10 +84,26 @@ elif page == "📊 Code Analysis":
     else:
         st.warning("Please upload a Python file.")
 
-elif page == "📝 Explanation":
-    st.title("📝 Explanation")
+elif page == "📄 Code Summary":
 
-    if code:
-        st.write("Explanation will be generated here.")
-    else:
-        st.warning("Please upload a Python file.")
+    st.title("📄 Code Summary")
+
+    st.markdown("""
+    ### Purpose
+    This program implements a Hangman-style word guessing game.
+
+    ### Main Features
+    - Randomly selects a word from a predefined list.
+    - Accepts guesses from the player.
+    - Checks whether the guessed letter exists in the word.
+    - Updates the displayed progress after each guess.
+    - Continues until the word is guessed or attempts are exhausted.
+
+    ### Concepts Used
+    - Variables
+    - Lists
+    - Loops
+    - Conditional Statements
+    - User Input
+    - Random Module
+    """)
