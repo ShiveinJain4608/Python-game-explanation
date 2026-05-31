@@ -179,7 +179,7 @@ elif page == "▶️ Run Game":
     "austria"
 ]
     if "word" not in st.session_state:
-    st.session_state.word = random.choice(words)
+     st.session_state.word = random.choice(words)
 
 if "guessed" not in st.session_state:
     st.session_state.guessed = []
