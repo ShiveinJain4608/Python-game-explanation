@@ -75,93 +75,102 @@ elif page == "📊 Code Analysis":
 
     st.title("📊 Code Analysis")
 
-    if code:
+    st.subheader("Program Type")
+    st.info("Interactive Country Guessing Game")
 
-        col1, col2, col3 = st.columns(3)
+    st.subheader("Modules Used")
+    st.write("""
+    • random
+      - Used to randomly select a country from the list.
+    """)
 
-        col1.metric("Lines of Code", lines)
-        col2.metric("Functions", functions)
-        col3.metric("Imports", imports)
+    st.subheader("Data Structures")
+    st.write("""
+    • List
+      - Stores the names of countries.
+    """)
 
-    else:
-        st.warning("Please upload a Python file.")
+    st.subheader("Input Processing")
+    st.write("""
+    • Takes user confirmation to start the game.
+    • Accepts level selection (1 or 2).
+    • Accepts character guesses from the player.
+    """)
+
+    st.subheader("Decision Making")
+    st.write("""
+    • Uses if-elif-else statements to:
+      - Check whether the user wants to play.
+      - Determine the selected difficulty level.
+      - Validate guessed characters.
+      - Decide whether the player wins or loses.
+    """)
+
+    st.subheader("Looping")
+    st.write("""
+    • A while loop is used to continue the game
+      until the player either:
+        - Completes the country name, or
+        - Runs out of attempts.
+    """)
+
+    st.subheader("Difficulty Levels")
+    st.write("""
+    Level 1:
+    - Displays a partially completed country name.
+
+    Level 2:
+    - Displays a fact-based hint about the country.
+    """)
+
+    st.subheader("Output")
+    st.write("""
+    • Displays hints.
+    • Shows game progress.
+    • Displays win/lose messages.
+    • Reveals the correct answer when necessary.
+    """)
+
+    st.subheader("Programming Concepts Demonstrated")
+    st.success("""
+    ✔ Variables
+
+    ✔ Lists
+
+    ✔ User Input
+
+    ✔ Loops
+
+    ✔ Conditional Statements
+
+    ✔ String Manipulation
+
+    ✔ Random Number Generation
+
+    ✔ Game Logic
+    """)
 
 elif page == "📄 Code Summary":
 
     st.title("📄 Code Summary")
 
     st.markdown("""
-    ### Purpose
-    This program implements a Hangman-style word guessing game.
+    ## 🎯 Purpose
 
-    ### Main Features
-    - Randomly selects a word from a predefined list.
-    - Accepts guesses from the player.
-    - Checks whether the guessed letter exists in the word.
-    - Updates the displayed progress after each guess.
-    - Continues until the word is guessed or attempts are exhausted.
-
-    ### Concepts Used
-    - Variables
-    - Lists
-    - Loops
-    - Conditional Statements
-    - User Input
-    - Random Module
-    """)
+    This program is a country-guessing game developed in Python. The player
+    must identify
 elif page == "🔄 Program Flow":
 
     st.title("🔄 Program Flow")
 
-    st.markdown("""
-    ### Hangman Game Flow
+    flowchart = graphviz.Digraph()
 
-    Start
-
-    ↓
-
-    Display Welcome Message
-
-    ↓
-
-    Select Random Word
-
-    ↓
-
-    Initialize Game Variables
-
-    ↓
-
-    Ask User for a Letter
-
-    ↓
-
-    Is Letter in Word?
-
-    ↓
-
-    Yes → Update Progress
-
-    ↓
-
-    No → Reduce Attempts
-
-    ↓
-
-    Is Word Complete?
-
-    ↓
-
-    Yes → Player Wins
-
-    ↓
-
-    No → Continue Loop
-
-    ↓
-
-    End Game
-    """)
+    flowchart.node("A", "Start")
+    flowchart.node("B", "Ask Player to Play")
+    flowchart.node("C", "Select Random Country")
+    flowchart.node("D", "Choose Level")
+    flowchart.node("E", "Level 1 Hint")
+    flowchart.node("F",
 elif page == "▶️ Run Game":
 
     import random
