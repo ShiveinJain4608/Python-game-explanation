@@ -17,8 +17,7 @@ page = st.sidebar.radio(
     "💻 Source Code",
     "📊 Code Analysis",
     "📄 Code Summary",
-    "🔄 Program Flow",
-     "▶️ Run Game"
+    "🔄 Program Flow"
 ]
 )
 
