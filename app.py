@@ -8,25 +8,27 @@ st.set_page_config(
 
 st.title("🐍 Python Code Explainer Dashboard")
 
-st.write(
-    "This dashboard helps explain Python code using AI-generated explanations."
+st.markdown(
+    "Upload or display Python code and explain its working step-by-step."
 )
 
-st.header("Python Code")
-
-sample_code = """
+code = """
 print("Welcome")
 name = input("Enter your name: ")
 print("Hello", name)
 """
 
-st.code(sample_code, language="python")
+col1, col2 = st.columns(2)
 
-st.header("Explanation")
+with col1:
+    st.subheader("💻 Python Code")
+    st.code(code, language="python")
 
-st.write("""
-1. The program displays 'Welcome'.
-2. It asks the user to enter their name.
-3. The entered name is stored in the variable 'name'.
-4. The final line prints a greeting.
-""")
+with col2:
+    st.subheader("📝 Explanation")
+    st.write("""
+    - Line 1 prints 'Welcome'.
+    - Line 2 asks the user for input.
+    - Line 3 stores the input in a variable called `name`.
+    - Line 4 displays a greeting message.
+    """)
