@@ -155,10 +155,66 @@ elif page == "📄 Code Summary":
     st.title("📄 Code Summary")
 
     st.markdown("""
-    ## 🎯 Purpose
+## 🎯 Purpose
 
-    This program is a country-guessing game developed in Python. The player
-    must identify
+This program is a country-guessing game developed in Python.
+
+The player must identify a randomly selected country by guessing its letters in sequence.
+
+---
+
+## 🎮 Gameplay
+
+1. The user chooses whether to play the game.
+2. A country is randomly selected from a predefined list.
+3. The player selects a difficulty level.
+4. A hint is displayed based on the chosen level.
+5. The player guesses characters one at a time.
+6. Correct guesses build the country name.
+7. Incorrect guesses reduce the available attempts.
+8. The game continues until the player wins or runs out of attempts.
+
+---
+
+## 🏆 Difficulty Levels
+
+### Level 1
+- Displays a partially completed country name.
+- Easier because some letters are already revealed.
+
+### Level 2
+- Displays a fact-based hint about the country.
+- More challenging because the full word is hidden.
+
+---
+
+## 💡 Features
+
+- Random country selection
+- Two difficulty levels
+- Hint system
+- Attempt counter
+- Win/Lose detection
+- Interactive gameplay
+
+---
+
+## 🛠 Python Concepts Used
+
+- Variables
+- Lists
+- User Input
+- Conditional Statements
+- Loops
+- String Manipulation
+- Random Module
+
+---
+
+## 🎯 Learning Outcome
+
+This project demonstrates how Python can be used to build an interactive game using decision-making, looping, lists, strings, and randomization.
+""")
 elif page == "🔄 Program Flow":
 
     st.title("🔄 Program Flow")
