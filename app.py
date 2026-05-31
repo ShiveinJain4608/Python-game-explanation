@@ -1,6 +1,7 @@
 import streamlit as st
 import ast
 import random
+import graphviz
 
 st.set_page_config(
     page_title="Python Code Explainer",
@@ -222,11 +223,48 @@ elif page == "🔄 Program Flow":
     flowchart = graphviz.Digraph()
 
     flowchart.node("A", "Start")
-    flowchart.node("B", "Ask Player to Play")
+    flowchart.node("B", "Play Game?")
     flowchart.node("C", "Select Random Country")
     flowchart.node("D", "Choose Level")
-    flowchart.node("E", "Level 1 Hint")
-    flowchart.node("F",
+    flowchart.node("E", "Display Hint")
+    flowchart.node("F", "Take Character Guess")
+    flowchart.node("G", "Correct Character?")
+    flowchart.node("H", "Update Progress")
+    flowchart.node("I", "Word Complete?")
+    flowchart.node("J", "Reduce Attempts")
+    flowchart.node("K", "Attempts Left?")
+    flowchart.node("L", "Player Wins")
+    flowchart.node("M", "Game Over")
+
+    flowchart.edge("A", "B")
+    flowchart.edge("B", "C", "Yes")
+    flowchart.edge("C", "D")
+    flowchart.edge("D", "E")
+    flowchart.edge("E", "F")
+    flowchart.edge("F", "G")
+    flowchart.edge("G", "H", "Yes")
+    flowchart.edge("H", "I")
+    flowchart.edge("I", "L", "Yes")
+    flowchart.edge("I", "F", "No")
+    flowchart.edge("G", "J", "No")
+    flowchart.edge("J", "K")
+    flowchart.edge("K", "F", "Yes")
+    flowchart.edge("K", "M", "No")
+
+    st.graphviz_chart(flowchart)
+
+    st.subheader("Flow Description")
+
+    st.write("""
+    1. The player chooses whether to play the game.
+    2. A random country is selected.
+    3. The player chooses a difficulty level.
+    4. A hint is displayed.
+    5. The player guesses characters one at a time.
+    6. Correct guesses build the country name.
+    7. Wrong guesses reduce the remaining attempts.
+    8. The game continues until the country is completed or attempts run out.
+    """)
 elif page == "▶️ Run Game":
 
     import random
